@@ -3,6 +3,7 @@ package fr.pizzeria.dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoMemoire implements IPizzaDao {
@@ -25,7 +26,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	}
 
 	@Override
-	public boolean saveNewPizza(Pizza pizza) {
+	public boolean saveNewPizza(Pizza pizza) throws SavePizzaException {
 		LOG.debug("Sauvegarde de la pizza {}", pizza);
 		int nouvelIndex = this.findNewId();
 		pizza.setId(nouvelIndex);
