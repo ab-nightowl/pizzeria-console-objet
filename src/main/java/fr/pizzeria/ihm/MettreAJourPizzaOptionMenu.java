@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.PizzaDaoMemoire;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class MettreAJourPizzaOptionMenu extends OptionMenu {
@@ -22,6 +24,8 @@ public class MettreAJourPizzaOptionMenu extends OptionMenu {
 	@Override
 	public boolean execute() {
 
+		boolean saisieCorrecte = false;
+		
 		do {
 			LOG.info("Veuillez choisir le code de la pizza à modifier (en majuscules)");
 			userChoice = sc.nextLine();
@@ -33,18 +37,71 @@ public class MettreAJourPizzaOptionMenu extends OptionMenu {
 
 		} while (!trouve);
 
-		LOG.info("Veuillez saisir le code");
-		String nouveauCode = sc.nextLine();
+		
+		String nouveauCode = "";
+		do {
+			try {
+				LOG.info("Veuillez saisir le code");
+				nouveauCode = sc.nextLine();
+				
+				if (nouveauCode.isEmpty() || nouveauCode.length() != 3 || !nouveauCode.matches("^[A-Z]{3}$")) {
+					throw new UpdatePizzaException("Veuillez saisir un code valide");
+				}
+				
+				saisieCorrecte = true;
+			} catch (UpdatePizzaException e) {
+				LOG.info(e.getMessage());
+			}
+			
+		} while (!saisieCorrecte);
 
-		LOG.info("Veuillez saisir le nom (sans espace)");
-		String nouveauNom = sc.nextLine();
+		
+		String nouveauNom = "";
+		do {
+			try {
+				LOG.info("Veuillez saisir le nom (sans espace)");
+				nouveauNom = sc.nextLine();
+				
+				if (nouveauNom.isEmpty()) {
+					throw new UpdatePizzaException("Veuillez saisir un nom valide");
+				}
+				
+				saisieCorrecte = true;
+			} catch (UpdatePizzaException e) {
+				LOG.info(e.getMessage());
+			}
+			
+		} while (!saisieCorrecte);
 
-		LOG.info("Veuillez saisir le prix");
-		Integer nouveauPrix = Integer.parseInt(sc.nextLine());
+		
+		Integer nouveauPrix = 0;
+		do {
+			try {
+				LOG.info("Veuillez saisir le prix");
+				String saisie = sc.nextLine().trim();
+				
+				if (saisie.isEmpty()){
+					throw new SavePizzaException("Veuillez saisir un prix valide");
+				}
+				nouveauPrix = Integer.parseInt(saisie);
+				
+				saisieCorrecte = true;
+			} catch (NumberFormatException e) {
+				LOG.info(e.getMessage());
+			} catch (SavePizzaException e) {
+				LOG.info(e.getMessage());
+			}
+			
+		} while (!saisieCorrecte);
 
+		
 		Pizza nouvellePizza = new Pizza(nouveauCode, nouveauNom, nouveauPrix);
 
-		dao.updatePizza(userChoice, nouvellePizza);
+		try {
+			dao.updatePizza(userChoice, nouvellePizza);
+		} catch (UpdatePizzaException e) {
+			LOG.info(e.getMessage());
+		}
 
 		return false;
 	}

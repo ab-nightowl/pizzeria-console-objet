@@ -23,12 +23,9 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 	@Override
 	public boolean execute() {
 
-		String code = "";
-		String nom = "";
-		double prix = 0;
-		
 		boolean saisieCorrecte = false;
 		
+		String code = "";
 		do {
 			try {
 				LOG.info("Veuillez saisir le code");
@@ -47,6 +44,7 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 		} while (!saisieCorrecte);
 		
 		
+		String nom = "";
 		do {
 			try {
 				LOG.info("Veuillez saisir le nom (sans espace)");
@@ -65,10 +63,12 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 		} while (!saisieCorrecte);
 		
 		
+		double prix = 0;
 		do {
 			try {
 				LOG.info("Veuillez saisir le prix");
 				String saisie = sc.nextLine().trim();
+				
 				if (saisie.isEmpty()){
 					throw new SavePizzaException("Veuillez saisir un prix valide");
 				}
@@ -76,6 +76,8 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 				
 				saisieCorrecte = true;
 				
+			} catch (NumberFormatException e) {
+				LOG.info(e.getMessage());
 			} catch (SavePizzaException e) {
 				LOG.info(e.getMessage());
 			}

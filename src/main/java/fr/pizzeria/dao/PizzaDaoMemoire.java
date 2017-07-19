@@ -3,7 +3,9 @@ package fr.pizzeria.dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoMemoire implements IPizzaDao {
@@ -35,7 +37,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	}
 
 	@Override
-	public boolean updatePizza(String codePizza, Pizza pizzaAJour) {
+	public boolean updatePizza(String codePizza, Pizza pizzaAJour) throws UpdatePizzaException {
 		LOG.debug("Mise à jour de la pizza {}", pizzaAJour);
 		for (Integer i = 0; i < carteDesPizzas.length; i++) {
 			if (carteDesPizzas[i] != null) {
@@ -52,7 +54,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	}
 
 	@Override
-	public boolean deletePizza(String codePizza) {
+	public boolean deletePizza(String codePizza) throws DeletePizzaException {
 		LOG.debug("Suppression de la pizza {}", codePizza);
 		for (Integer i = 0; i < carteDesPizzas.length; i++) {
 			if (carteDesPizzas[i] != null) {

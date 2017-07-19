@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.PizzaDaoMemoire;
+import fr.pizzeria.exception.DeletePizzaException;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu {
 
@@ -32,7 +33,11 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 			}
 		} while (!trouve);
 
-		dao.deletePizza(userChoice);
+		try {
+			dao.deletePizza(userChoice);
+		} catch (DeletePizzaException e) {
+			LOG.info(e.getMessage());
+		}
 
 		return false;
 	}
