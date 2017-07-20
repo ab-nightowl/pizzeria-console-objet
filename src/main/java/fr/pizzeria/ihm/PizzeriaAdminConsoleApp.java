@@ -1,6 +1,7 @@
 package fr.pizzeria.ihm;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +20,13 @@ public class PizzeriaAdminConsoleApp {
 		LOG.debug("Création d'une instance de PizzaDaoMémoire");
 		PizzaDaoMemoire dao = new PizzaDaoMemoire();
 		
-		LOG.info("Initialisation des pizzas...");
+		LOG.debug("La methode initPizza est invoquée");
 		dao.initPizzas(pizzas);
-		LOG.info("...pizzas initialisées");
 		
 		LOG.debug("Création du menu de bienvenue");
 		Menu menu = new Menu(dao);
 		
+		LOG.debug("La methode manage est invoquée");
 		menu.manage();
 	}
 

@@ -23,7 +23,11 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	 * méthode implémentée de l'interface IPizzaDao
 	 * @param listPizzas
 	 */
-	public void initPizzas(List<Pizza> listPizzas) {}
+	public void initPizzas(List<Pizza> listPizzas) {
+		LOG.info("Initialisation des pizzas...");
+		this.pizzas = pizzas;
+		LOG.info("...pizzas initialisées");
+	}
 
 	@Override
 	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
@@ -54,8 +58,8 @@ public class PizzaDaoMemoire implements IPizzaDao {
 
 	@Override
 	public List<Pizza> findAllPizzas() {
-		LOG.debug("Recherche de toutes les pizzas");
-		return pizzas;
+		LOG.debug("Récupération des pizzas");
+		return new ArrayList<Pizza>(pizzas);
 	}
 
 	public boolean findByCode(String codePizza) {
