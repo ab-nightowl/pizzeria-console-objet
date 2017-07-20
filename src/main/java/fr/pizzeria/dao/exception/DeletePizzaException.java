@@ -1,4 +1,4 @@
-package fr.pizzeria.exception;
+package fr.pizzeria.dao.exception;
 
 public class DeletePizzaException extends Exception {
 

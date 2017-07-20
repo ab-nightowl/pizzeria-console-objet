@@ -1,10 +1,10 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.PizzaDaoMemoire;
-import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.dao.exception.SavePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class NouvellePizzaOptionMenu extends OptionMenu {

@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import java.util.List;
 
@@ -23,13 +23,13 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 
 	@Override
 	public boolean execute() {
-		List<Pizza> carteDesPizzas = dao.findAllPizzas();
-		ListerPizzasOptionMenu.afficherCarte(carteDesPizzas);
+		List<Pizza> pizzas = dao.findAllPizzas();
+		ListerPizzasOptionMenu.afficherCarte(pizzas);
 		return false;
 	}
 
-	public static void afficherCarte(List<Pizza> carteDesPizzas) {
-		for (Pizza pizza : carteDesPizzas) {
+	public static void afficherCarte(List<Pizza> pizzas) {
+		for (Pizza pizza : pizzas) {
 			if (pizza != null) {
 				LOG.info(pizza.getCode() + " -> " + pizza.getNom() + " (" + pizza.getPrix() + ")");
 			}

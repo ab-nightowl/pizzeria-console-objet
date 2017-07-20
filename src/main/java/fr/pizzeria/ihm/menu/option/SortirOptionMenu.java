@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu.option;
 
 import fr.pizzeria.dao.PizzaDaoMemoire;
 

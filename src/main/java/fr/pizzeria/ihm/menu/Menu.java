@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.menu;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,10 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.PizzaDaoMemoire;
+import fr.pizzeria.ihm.menu.option.ListerPizzasOptionMenu;
+import fr.pizzeria.ihm.menu.option.MettreAJourPizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.NouvellePizzaOptionMenu;
+import fr.pizzeria.ihm.menu.option.OptionMenu;
+import fr.pizzeria.ihm.menu.option.SortirOptionMenu;
+import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
 
 public class Menu {
 
-	PizzaDaoMemoire dao;
 	Scanner sc;
 	String userInput;
 
@@ -28,8 +33,7 @@ public class Menu {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Menu.class);
 
-	public Menu() {
-		this.dao = new PizzaDaoMemoire();
+	public Menu(PizzaDaoMemoire dao) {
 		this.sc = new Scanner(System.in);
 		this.userInput = "";
 
@@ -44,7 +48,6 @@ public class Menu {
 		actions.put(3, mettreAJourPizza);
 		actions.put(4, supprimerPizza);
 		actions.put(99, sortir);
-
 	}
 
 	public void manage() {
