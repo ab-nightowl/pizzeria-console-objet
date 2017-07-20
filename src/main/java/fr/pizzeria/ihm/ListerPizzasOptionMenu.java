@@ -1,5 +1,7 @@
 package fr.pizzeria.ihm;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,12 +23,12 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 
 	@Override
 	public boolean execute() {
-		Pizza[] carteDesPizzas = dao.findAllPizzas();
+		List<Pizza> carteDesPizzas = dao.findAllPizzas();
 		ListerPizzasOptionMenu.afficherCarte(carteDesPizzas);
 		return false;
 	}
 
-	public static void afficherCarte(Pizza[] carteDesPizzas) {
+	public static void afficherCarte(List<Pizza> carteDesPizzas) {
 		for (Pizza pizza : carteDesPizzas) {
 			if (pizza != null) {
 				LOG.info(pizza.getCode() + " -> " + pizza.getNom() + " (" + pizza.getPrix() + ")");
