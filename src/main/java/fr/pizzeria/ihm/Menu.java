@@ -1,5 +1,8 @@
 package fr.pizzeria.ihm;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import org.slf4j.Logger;
@@ -19,7 +22,9 @@ public class Menu {
 	SupprimerPizzaOptionMenu supprimerPizza;
 	SortirOptionMenu sortir;
 
-	OptionMenu[] options;
+	Map<Integer, OptionMenu> actions = new HashMap<>();
+	
+	private static final int NUMERO_OPTION_SORTIE = 99;
 
 	private static final Logger LOG = LoggerFactory.getLogger(Menu.class);
 
@@ -34,53 +39,33 @@ public class Menu {
 		this.supprimerPizza = new SupprimerPizzaOptionMenu(dao);
 		this.sortir = new SortirOptionMenu(dao);
 
-		this.options = new OptionMenu[5];
-		this.options[0] = listerPizza;
-		this.options[1] = nouvellePizza;
-		this.options[2] = mettreAJourPizza;
-		this.options[3] = supprimerPizza;
-		this.options[4] = sortir;
+		actions.put(1, listerPizza);
+		actions.put(2, nouvellePizza);
+		actions.put(3, mettreAJourPizza);
+		actions.put(4, supprimerPizza);
+		actions.put(99, sortir);
 
 	}
 
 	public void manage() {
-		while (!(userInput.equals("99"))) {
+		int saisie = NUMERO_OPTION_SORTIE;
+
+		// Afficher le menu tant qu'on ne sort pas (ie : response = 99)
+		do {
+			// afficher menu
 			LOG.info("***** Pizzeria Administration *****");
-			Menu.afficher(options);
-			userInput = sc.nextLine();
+			actions.forEach((numero, option) -> LOG.info(numero + ". " + option.getLibelle()));
 
-			switch (userInput) {
-			case ("1"):
-				listerPizza.execute();
-				break;
+			saisie = sc.nextInt();
 
-			case ("2"):
-				listerPizza.execute();
-				nouvellePizza.execute();
-				break;
-
-			case ("3"):
-				listerPizza.execute();
-				mettreAJourPizza.execute();
-				break;
-
-			case ("4"):
-				listerPizza.execute();
-				supprimerPizza.execute();
-				break;
-
-			case ("99"):
-				sortir.execute();
-				break;
-
-			default:
-				Menu.afficher(options);
-			}
-		}
+			actions.get(saisie).execute();
+		} while (saisie != NUMERO_OPTION_SORTIE);
 	}
 
-	public static void afficher(OptionMenu[] menu) {
-		for (OptionMenu option : menu) {
+	public void afficher() {
+		Collection<OptionMenu> options = actions.values();
+
+		for (OptionMenu option : options) {
 			LOG.info(option.getLibelle());
 		}
 	}
