@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.PizzaDaoMemoire;
-import fr.pizzeria.dao.exception.SavePizzaException;
 import fr.pizzeria.dao.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
@@ -25,7 +24,7 @@ public class MettreAJourPizzaOptionMenu extends OptionMenu {
 	public boolean execute() {
 
 		boolean saisieCorrecte = false;
-		
+
 		do {
 			LOG.info("Veuillez choisir le code de la pizza à modifier (en majuscules)");
 			userChoice = sc.nextLine();
@@ -37,64 +36,49 @@ public class MettreAJourPizzaOptionMenu extends OptionMenu {
 
 		} while (!trouve);
 
-		
 		String nouveauCode = "";
 		do {
-			try {
-				LOG.info("Veuillez saisir le code");
-				nouveauCode = sc.nextLine();
-				
-				if (nouveauCode.isEmpty() || nouveauCode.length() != 3 || !nouveauCode.matches("^[A-Z]{3}$")) {
-					throw new UpdatePizzaException("Veuillez saisir un code valide");
-				}
-				
-				saisieCorrecte = true;
-			} catch (UpdatePizzaException e) {
-				LOG.info(e.getMessage());
+			LOG.info("Veuillez saisir le code");
+			nouveauCode = sc.nextLine();
+
+			if (!nouveauCode.matches("^[A-Z]{3}$")) {
+				LOG.info("Veuillez saisir un code valide");
 			}
-			
+
+			saisieCorrecte = true;
+
 		} while (!saisieCorrecte);
 
-		
 		String nouveauNom = "";
 		do {
-			try {
-				LOG.info("Veuillez saisir le nom (sans espace)");
-				nouveauNom = sc.nextLine();
-				
-				if (nouveauNom.isEmpty()) {
-					throw new UpdatePizzaException("Veuillez saisir un nom valide");
-				}
-				
-				saisieCorrecte = true;
-			} catch (UpdatePizzaException e) {
-				LOG.info(e.getMessage());
+			LOG.info("Veuillez saisir le nom (sans espace)");
+			nouveauNom = sc.nextLine();
+
+			if (nouveauNom.isEmpty()) {
+				LOG.info("Veuillez saisir un nom valide");
 			}
-			
+
+			saisieCorrecte = true;
+
 		} while (!saisieCorrecte);
 
-		
 		Integer nouveauPrix = 0;
 		do {
 			try {
 				LOG.info("Veuillez saisir le prix");
 				String saisie = sc.nextLine().trim();
-				
-				if (saisie.isEmpty()){
-					throw new SavePizzaException("Veuillez saisir un prix valide");
+
+				if (saisie.isEmpty()) {
+					LOG.info("Veuillez saisir un prix valide");
 				}
 				nouveauPrix = Integer.parseInt(saisie);
-				
+
 				saisieCorrecte = true;
 			} catch (NumberFormatException e) {
 				LOG.info(e.getMessage());
-			} catch (SavePizzaException e) {
-				LOG.info(e.getMessage());
 			}
-			
 		} while (!saisieCorrecte);
 
-		
 		Pizza nouvellePizza = new Pizza(nouveauCode, nouveauNom, nouveauPrix);
 
 		try {

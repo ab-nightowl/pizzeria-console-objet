@@ -24,69 +24,51 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 	public boolean execute() {
 
 		boolean saisieCorrecte = false;
-		
+
 		String code = "";
 		do {
-			try {
-				LOG.info("Veuillez saisir le code");
-				code = sc.nextLine().trim();
-				
-				if (code.isEmpty() || code.length() != 3 || !code.matches("^[A-Z]{3}$")) {
-					throw new SavePizzaException("Veuillez saisir un code valide");
-				}
-				
+			LOG.info("Veuillez saisir le code");
+			code = sc.nextLine().trim();
+
+			if (!code.matches("^[A-Z]{3}$")) {
+				LOG.info("Veuillez saisir un code valide");
+			} else {
 				saisieCorrecte = true;
-				
-			} catch (SavePizzaException e) {
-				LOG.info(e.getMessage());
 			}
-				
 		} while (!saisieCorrecte);
-		
-		
+
 		String nom = "";
 		do {
-			try {
-				LOG.info("Veuillez saisir le nom (sans espace)");
-				nom = sc.nextLine().trim();
-				
-				if (nom.isEmpty()) {
-					throw new SavePizzaException("Veuillez saisir un nom valide");
-				}
-				
-				saisieCorrecte = true;
-				
-			} catch (SavePizzaException e) {
-				LOG.info(e.getMessage());
+			LOG.info("Veuillez saisir le nom (sans espace)");
+			nom = sc.nextLine().trim();
+
+			if (nom.isEmpty()) {
+				LOG.info("Veuillez saisir un nom valide");
 			}
-				
+
+			saisieCorrecte = true;
 		} while (!saisieCorrecte);
-		
-		
+
 		double prix = 0;
 		do {
 			try {
 				LOG.info("Veuillez saisir le prix");
 				String saisie = sc.nextLine().trim();
-				
-				if (saisie.isEmpty()){
-					throw new SavePizzaException("Veuillez saisir un prix valide");
+
+				if (saisie.isEmpty()) {
+					LOG.info("Veuillez saisir un prix valide");
 				}
 				prix = Integer.parseInt(saisie);
-				
+
 				saisieCorrecte = true;
-				
+
 			} catch (NumberFormatException e) {
 				LOG.info(e.getMessage());
-			} catch (SavePizzaException e) {
-				LOG.info(e.getMessage());
 			}
-				
 		} while (!saisieCorrecte);
-		
-		
+
 		Pizza nouvellePizza = new Pizza(code, nom, prix);
-				
+
 		try {
 			dao.saveNewPizza(nouvellePizza);
 		} catch (SavePizzaException e) {
