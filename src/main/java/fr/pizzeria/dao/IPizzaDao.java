@@ -11,9 +11,9 @@ public interface IPizzaDao {
 
 	List<Pizza> findAllPizzas();
 
-	boolean saveNewPizza(Pizza pizza) throws SavePizzaException;
+	void saveNewPizza(Pizza pizza) throws SavePizzaException;
 
-	boolean updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException;
+	void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException;
 
-	boolean deletePizza(String codePizza) throws DeletePizzaException;
+	void deletePizza(String codePizza) throws DeletePizzaException;
 }

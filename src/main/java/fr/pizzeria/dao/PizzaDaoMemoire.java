@@ -2,6 +2,7 @@ package fr.pizzeria.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,11 +16,9 @@ public class PizzaDaoMemoire implements IPizzaDao {
 
 	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoMemoire.class);
 
-	private List<Pizza> carteDesPizzas;
+	private List<Pizza> carteDesPizzas = new ArrayList<>();
 
 	public PizzaDaoMemoire() {
-		carteDesPizzas = new ArrayList<Pizza>();
-
 		carteDesPizzas.add(new Pizza("PEP", "Pépéroni", 12.50));
 		carteDesPizzas.add(new Pizza("MAR", "Margherita", 14.00));
 		carteDesPizzas.add(new Pizza("REI", "La Reine", 11.50));
@@ -31,40 +30,30 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	}
 
 	@Override
-	public boolean saveNewPizza(Pizza pizza) throws SavePizzaException {
+	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
 		LOG.debug("Sauvegarde de la pizza {}", pizza);
 		carteDesPizzas.add(pizza);
-		return false;
 	}
 
 	@Override
-	public boolean updatePizza(String codePizza, Pizza pizzaAJour) throws UpdatePizzaException {
+	public void updatePizza(String codePizza, Pizza pizzaAJour) throws UpdatePizzaException {
 		LOG.debug("Mise à jour de la pizza {}", pizzaAJour);
-		for (Pizza pizza : carteDesPizzas) {
-			String codeCourant = pizza.getCode();
 
-			if (codePizza.equals(codeCourant)) {
-				carteDesPizzas.add(pizzaAJour);
-			}
+		Optional<Pizza> pizzaTrouve = carteDesPizzas.stream().filter(p -> p.getCode().equals(codePizza)).findAny();
+		if (pizzaTrouve.isPresent()) {
+			carteDesPizzas.remove(pizzaTrouve.get());
+			carteDesPizzas.add(pizzaAJour);
 		}
-
-		return false;
 	}
 
 	@Override
-	public boolean deletePizza(String codePizza) throws DeletePizzaException {
+	public void deletePizza(String codePizza) throws DeletePizzaException {
 		LOG.debug("Suppression de la pizza {}", codePizza);
-		for (Pizza pizza : carteDesPizzas) {
-			if (pizza.getId() != null) {
-				String codeCourant = pizza.getCode();
 
-				if (codePizza.equals(codeCourant)) {
-					carteDesPizzas.remove(pizza);
-				}
-			}
+		Optional<Pizza> pizzaTrouve = carteDesPizzas.stream().filter(p -> p.getCode().equals(codePizza)).findAny();
+		if (pizzaTrouve.isPresent()) {
+			carteDesPizzas.remove(pizzaTrouve.get());
 		}
-
-		return false;
 	}
 
 	@Override
