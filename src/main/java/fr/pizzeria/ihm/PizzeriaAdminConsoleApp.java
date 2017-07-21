@@ -15,6 +15,7 @@ public class PizzeriaAdminConsoleApp {
 	private static final Logger LOG = LoggerFactory.getLogger(PizzeriaAdminConsoleApp.class);
 
 	public static void main(String[] args) {
+		
 		List<Pizza> pizzas = creerListPizzas();
 		
 		LOG.debug("Création d'une instance de PizzaDaoMémoire");

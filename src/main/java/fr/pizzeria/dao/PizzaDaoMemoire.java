@@ -28,7 +28,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		this.pizzas = pizzas;
 		LOG.info("...pizzas initialisées");
 	}
-
+	
 	@Override
 	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
 		LOG.debug("Sauvegarde de la pizza {}", pizza);

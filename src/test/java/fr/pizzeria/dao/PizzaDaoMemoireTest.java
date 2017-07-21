@@ -16,7 +16,7 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoMemoireTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoMemoireTest.class);
-
+	
 	@Test
 	public void testSaveNewPizza() throws SavePizzaException {
 		LOG.info("Etant donné une instance de la classe Pizza avec le code NEW");
