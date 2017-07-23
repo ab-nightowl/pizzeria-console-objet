@@ -19,5 +19,5 @@ public interface IPizzaDao {
 
 	void deletePizza(String codePizza) throws DeletePizzaException;
 	
-	default void initPizzas(List<Pizza> pizzas) {}
+	default void initPizzas() {}
 }

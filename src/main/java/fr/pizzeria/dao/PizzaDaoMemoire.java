@@ -15,17 +15,27 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoMemoire implements IPizzaDao {
 
 	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoMemoire.class);
-
-	private List<Pizza> pizzas = new ArrayList<>();
-
+	
+	private List<Pizza> pizzas;
+	
 	/**
 	 * initPizzas:
-	 * méthode implémentée de l'interface IPizzaDao
-	 * @param listPizzas
+	 * initialise une liste de pizzas en mémoire cache
 	 */
-	public void initPizzas(List<Pizza> listPizzas) {
+	@Override
+	public void initPizzas() {
 		LOG.info("Initialisation des pizzas...");
-		this.pizzas = listPizzas;
+		
+		LOG.debug("Création d'une liste de 8 pizzas");
+		pizzas = new ArrayList<>();
+		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50));
+		pizzas.add(new Pizza("MAR", "Margherita", 14.00));
+		pizzas.add(new Pizza("REI", "La Reine", 11.50));
+		pizzas.add(new Pizza("FRO", "La 4 fromages", 12.00));
+		pizzas.add(new Pizza("CAN", "La Cannibale", 12.50));
+		pizzas.add(new Pizza("SAV", "La Savoyarde", 13.00));
+		pizzas.add(new Pizza("ORI", "L'Orientale", 13.50));
+		pizzas.add(new Pizza("IND", "L'Indienne", 14.00));
 		LOG.info("...pizzas initialisées");
 	}
 
