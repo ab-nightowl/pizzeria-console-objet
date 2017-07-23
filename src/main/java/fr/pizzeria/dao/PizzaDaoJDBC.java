@@ -1,7 +1,5 @@
 package fr.pizzeria.dao;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,6 +20,8 @@ public class PizzaDaoJDBC implements IPizzaDao {
 
 	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoJDBC.class);
 	
+	private List<Pizza> pizzas;
+	
 	private String driverClass;
 	private String url;
 	private String user;
@@ -40,7 +40,6 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		LOG.info("Initialisation des pizzas...");
 		
 		LOG.debug("Création d'une liste de 8 pizzas");
-		List<Pizza> pizzas = new ArrayList<>();
 		pizzas = new ArrayList<>();
 		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50));
 		pizzas.add(new Pizza("MAR", "Margherita", 14.00));
@@ -73,7 +72,6 @@ public class PizzaDaoJDBC implements IPizzaDao {
 	
 	@Override
 	public List<Pizza> findAllPizzas() {
-		List<Pizza> pizzas = new ArrayList<>();
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(url, user, password);
@@ -92,7 +90,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			// TODO retourner une exception pizza
 			LOG.error("Une erreur s'est produite.", e);
 		}
-		return pizzas;
+		return new ArrayList<Pizza>(pizzas);
 	}
 
 	@Override

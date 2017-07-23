@@ -26,7 +26,7 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	public void initPizzas() {
 		LOG.info("Initialisation des pizzas...");
 		
-		LOG.debug("Création d'une liste de 8 pizzas");
+		LOG.debug("Création d'une liste de 8 pizzas.");
 		pizzas = new ArrayList<>();
 		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50));
 		pizzas.add(new Pizza("MAR", "Margherita", 14.00));

@@ -2,8 +2,11 @@ package fr.pizzeria.dao;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +19,29 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoMemoireTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoMemoireTest.class);
+	
+	private List<Pizza> pizzas;
+	
+	@Before
+	public void setUp() throws SQLException {
+		LOG.info("setUp avant test...");
+		
+		LOG.info("Initialisation des pizzas...");
+		
+		LOG.debug("Création d'une nouvelle liste de 8 pizzas");
+		pizzas = new ArrayList<>();
+		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50));
+		pizzas.add(new Pizza("MAR", "Margherita", 14.00));
+		pizzas.add(new Pizza("REI", "La Reine", 11.50));
+		pizzas.add(new Pizza("FRO", "La 4 fromages", 12.00));
+		pizzas.add(new Pizza("CAN", "La Cannibale", 12.50));
+		pizzas.add(new Pizza("SAV", "La Savoyarde", 13.00));
+		pizzas.add(new Pizza("ORI", "L'Orientale", 13.50));
+		pizzas.add(new Pizza("IND", "L'Indienne", 14.00));
+		LOG.info("...pizzas initialisées");
+		
+		LOG.info("...setUp terminé");
+	}
 	
 	@Test
 	public void testFindAll() {
