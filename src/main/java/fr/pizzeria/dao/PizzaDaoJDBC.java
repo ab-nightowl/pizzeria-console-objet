@@ -1,7 +1,5 @@
 package fr.pizzeria.dao;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -35,20 +33,25 @@ public class PizzaDaoJDBC implements IPizzaDao {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoMemoireTest.class);
 
+	public void initPizzas(List<Pizza> listPizzas) {
+		LOG.info("Initialisation des pizzas...");
+		this.pizzas = listPizzas;
+		LOG.info("...pizzas initialisées");
+	}
+	
 	@Override
 	public List<Pizza> findAllPizzas() {
 		List<Pizza> pizzas = new ArrayList<>();
-		String allPizzas = "SELECT * FROM pizza";
+		String sql = "SELECT * FROM pizza";
 		
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(url, user, password);
 
-			PreparedStatement findAllPizzaSt = conn.prepareStatement(allPizzas);
+			PreparedStatement findAllPizzaSt = conn.prepareStatement(sql);
 			ResultSet result = findAllPizzaSt.executeQuery();
 
 			while (result.next()) {
-				Integer id = result.getInt("id");
 				String code = result.getString("code");
 				String nom = result.getString("nom");
 				Double prix = result.getDouble("prix");

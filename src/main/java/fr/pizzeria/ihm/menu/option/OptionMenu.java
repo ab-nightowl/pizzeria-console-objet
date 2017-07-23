@@ -1,19 +1,11 @@
 package fr.pizzeria.ihm.menu.option;
 
-import java.util.Scanner;
-
-import fr.pizzeria.dao.PizzaDaoMemoire;
-
 public abstract class OptionMenu {
 
-	protected PizzaDaoMemoire dao;
-	Scanner sc;
-	String userChoice;
+	protected String userChoice;
 	boolean trouve;
 	
-	public OptionMenu(PizzaDaoMemoire dao) {
-		this.dao = dao;
-		this.sc = new Scanner(System.in);
+	public OptionMenu() {
 		this.userChoice = "";
 		this.trouve = false;
 	}

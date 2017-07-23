@@ -2,10 +2,12 @@ package fr.pizzeria.ihm;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoMemoire;
 import fr.pizzeria.ihm.menu.Menu;
 import fr.pizzeria.model.Pizza;
@@ -16,22 +18,24 @@ public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
 		
-		List<Pizza> pizzas = creerListPizzas();
+		List<Pizza> pizzas = initPizzasMemoire();
 		
-		LOG.debug("Création d'une instance de PizzaDaoMémoire");
-		PizzaDaoMemoire dao = new PizzaDaoMemoire();
+		LOG.debug("Création d'une instance de PizzaDaoMémoire de type IPizzaDao");
+		IPizzaDao pizzaDao = new PizzaDaoMemoire();
 		
 		LOG.debug("La methode initPizza est invoquée");
-		dao.initPizzas(pizzas);
+		pizzaDao.initPizzas(pizzas);
 		
-		LOG.debug("Création du menu de bienvenue");
-		Menu menu = new Menu(dao);
-		
-		LOG.debug("La methode manage est invoquée");
-		menu.manage();
+		try (Scanner scanner = new Scanner(System.in)) {
+			LOG.debug("Création d'une instance de Menu");
+			Menu menu = new Menu(pizzaDao, scanner);
+			
+			LOG.debug("La methode manage est invoquée");
+			menu.manage();
+		}
 	}
 
-	private static List<Pizza> creerListPizzas() {
+	private static List<Pizza> initPizzasMemoire() {
 		LOG.debug("Création d'une liste de pizzas");
 		
 		List<Pizza> pizzas = new ArrayList<>();

@@ -35,6 +35,18 @@ public class PizzaDaoJDBCTest {
 	}
 
 	@Test
+	public void testFindAll() throws DeletePizzaException, SQLException {
+		LOG.info("testFindAllPizza");
+		
+		PizzaDaoJDBC pizzaDaoJDBC = new PizzaDaoJDBC("", "jdbc:h2:mem:testdb", "sa", "");
+		
+		List<Pizza> listPizzas = pizzaDaoJDBC.findAllPizzas();
+		
+		// TODO assert sur la listPizzas
+		
+	}
+	
+	@Test
 	public void testSaveNewPizza() throws SavePizzaException, SQLException {
 		LOG.info("testSaveNewPizza");
 		
@@ -124,16 +136,4 @@ public class PizzaDaoJDBCTest {
 		
 	}
 	
-	@Test
-	public void testFindAll() throws DeletePizzaException, SQLException {
-		LOG.info("testFindAllPizza");
-		
-		PizzaDaoJDBC pizzaDaoJDBC = new PizzaDaoJDBC("", "jdbc:h2:mem:testdb", "sa", "");
-		
-		List<Pizza> listPizzas = pizzaDaoJDBC.findAllPizzas();
-		
-		// TODO assert sur la listPizzas
-		
-	}
-
 }

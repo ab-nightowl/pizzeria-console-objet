@@ -25,8 +25,14 @@ public class PizzaDaoMemoire implements IPizzaDao {
 	 */
 	public void initPizzas(List<Pizza> listPizzas) {
 		LOG.info("Initialisation des pizzas...");
-		this.pizzas = pizzas;
+		this.pizzas = listPizzas;
 		LOG.info("...pizzas initialisées");
+	}
+
+	@Override
+	public List<Pizza> findAllPizzas() {
+		LOG.debug("Récupération des pizzas");
+		return new ArrayList<Pizza>(pizzas);
 	}
 	
 	@Override
@@ -54,12 +60,6 @@ public class PizzaDaoMemoire implements IPizzaDao {
 		if (pizzaTrouve.isPresent()) {
 			pizzas.remove(pizzaTrouve.get());
 		}
-	}
-
-	@Override
-	public List<Pizza> findAllPizzas() {
-		LOG.debug("Récupération des pizzas");
-		return new ArrayList<Pizza>(pizzas);
 	}
 
 	public boolean findByCode(String codePizza) {

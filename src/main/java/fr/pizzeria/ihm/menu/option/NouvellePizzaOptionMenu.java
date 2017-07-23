@@ -1,18 +1,25 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.util.Scanner;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.dao.PizzaDaoMemoire;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.exception.SavePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class NouvellePizzaOptionMenu extends OptionMenu {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ListerPizzasOptionMenu.class);
-
-	public NouvellePizzaOptionMenu(PizzaDaoMemoire dao) {
-		super(dao);
+	
+	private IPizzaDao dao;
+	private Scanner sc;
+	
+	public NouvellePizzaOptionMenu(IPizzaDao pizzaDao, Scanner scanner) {
+		super();
+		this.dao = pizzaDao;
+		this.sc = scanner;
 	}
 
 	@Override

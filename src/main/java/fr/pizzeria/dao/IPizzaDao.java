@@ -10,6 +10,8 @@ import fr.pizzeria.model.Pizza;
 public interface IPizzaDao {
 
 	List<Pizza> findAllPizzas();
+	
+	boolean findByCode(String userChoice);
 
 	void saveNewPizza(Pizza pizza) throws SavePizzaException;
 
@@ -17,5 +19,5 @@ public interface IPizzaDao {
 
 	void deletePizza(String codePizza) throws DeletePizzaException;
 	
-	default void initPizzas() {}
+	default void initPizzas(List<Pizza> pizzas) {}
 }

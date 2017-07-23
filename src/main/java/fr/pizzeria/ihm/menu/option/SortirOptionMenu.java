@@ -1,11 +1,11 @@
 package fr.pizzeria.ihm.menu.option;
 
-import fr.pizzeria.dao.PizzaDaoMemoire;
+import fr.pizzeria.dao.IPizzaDao;
 
 public class SortirOptionMenu extends OptionMenu {
 
-	public SortirOptionMenu(PizzaDaoMemoire dao) {
-		super(dao);
+	public SortirOptionMenu(IPizzaDao pizzaDao) {
+		super();
 	}
 
 	@Override

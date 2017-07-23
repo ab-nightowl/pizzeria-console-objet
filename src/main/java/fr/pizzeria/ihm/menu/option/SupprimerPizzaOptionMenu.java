@@ -1,17 +1,24 @@
 package fr.pizzeria.ihm.menu.option;
 
+import java.util.Scanner;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.dao.PizzaDaoMemoire;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.exception.DeletePizzaException;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	private static final Logger LOG = LoggerFactory.getLogger(SupprimerPizzaOptionMenu.class);
-
-	public SupprimerPizzaOptionMenu(PizzaDaoMemoire dao) {
-		super(dao);
+	
+	private IPizzaDao dao;
+	private Scanner sc;
+	
+	public SupprimerPizzaOptionMenu(IPizzaDao pizzaDao, Scanner scanner) {
+		super();
+		this.dao = pizzaDao;
+		this.sc = scanner;
 	}
 
 	@Override

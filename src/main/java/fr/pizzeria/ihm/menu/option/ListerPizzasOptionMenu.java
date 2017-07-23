@@ -5,15 +5,18 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.dao.PizzaDaoMemoire;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.model.Pizza;
 
 public class ListerPizzasOptionMenu extends OptionMenu {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ListerPizzasOptionMenu.class);
-
-	public ListerPizzasOptionMenu(PizzaDaoMemoire dao) {
-		super(dao);
+	
+	private IPizzaDao dao;
+	
+	public ListerPizzasOptionMenu(IPizzaDao pizzaDao) {
+		super();
+		this.dao = pizzaDao;
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package fr.pizzeria.ihm.menu;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -8,7 +7,7 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.dao.PizzaDaoMemoire;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.ihm.menu.option.ListerPizzasOptionMenu;
 import fr.pizzeria.ihm.menu.option.MettreAJourPizzaOptionMenu;
 import fr.pizzeria.ihm.menu.option.NouvellePizzaOptionMenu;
@@ -18,30 +17,27 @@ import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
 
 public class Menu {
 
-	Scanner sc;
-	String userInput;
-
-	ListerPizzasOptionMenu listerPizza;
-	NouvellePizzaOptionMenu nouvellePizza;
-	MettreAJourPizzaOptionMenu mettreAJourPizza;
-	SupprimerPizzaOptionMenu supprimerPizza;
-	SortirOptionMenu sortir;
-
-	Map<Integer, OptionMenu> actions = new HashMap<>();
-	
-	private static final int NUMERO_OPTION_SORTIE = 99;
-
 	private static final Logger LOG = LoggerFactory.getLogger(Menu.class);
+	private static final int NUMERO_OPTION_SORTIE = 99;
+	
+	private Scanner sc;
+	
+	private ListerPizzasOptionMenu listerPizza;
+	private NouvellePizzaOptionMenu nouvellePizza;
+	private MettreAJourPizzaOptionMenu mettreAJourPizza;
+	private SupprimerPizzaOptionMenu supprimerPizza;
+	private SortirOptionMenu sortir;
 
-	public Menu(PizzaDaoMemoire dao) {
-		this.sc = new Scanner(System.in);
-		this.userInput = "";
-
-		this.listerPizza = new ListerPizzasOptionMenu(dao);
-		this.nouvellePizza = new NouvellePizzaOptionMenu(dao);
-		this.mettreAJourPizza = new MettreAJourPizzaOptionMenu(dao);
-		this.supprimerPizza = new SupprimerPizzaOptionMenu(dao);
-		this.sortir = new SortirOptionMenu(dao);
+	private Map<Integer, OptionMenu> actions = new HashMap<>();
+	
+	public Menu(IPizzaDao pizzaDao, Scanner scanner) {
+		this.sc = scanner;
+		
+		this.listerPizza = new ListerPizzasOptionMenu(pizzaDao);
+		this.nouvellePizza = new NouvellePizzaOptionMenu(pizzaDao, scanner);
+		this.mettreAJourPizza = new MettreAJourPizzaOptionMenu(pizzaDao, scanner);
+		this.supprimerPizza = new SupprimerPizzaOptionMenu(pizzaDao, scanner);
+		this.sortir = new SortirOptionMenu(pizzaDao);
 
 		actions.put(1, listerPizza);
 		actions.put(2, nouvellePizza);
@@ -51,6 +47,10 @@ public class Menu {
 	}
 
 	public void manage() {
+		this.afficher();
+	}
+
+	public void afficher() {
 		int saisie = NUMERO_OPTION_SORTIE;
 
 		// Afficher le menu tant qu'on ne sort pas (ie : response = 99)
@@ -63,14 +63,6 @@ public class Menu {
 
 			actions.get(saisie).execute();
 		} while (saisie != NUMERO_OPTION_SORTIE);
-	}
-
-	public void afficher() {
-		Collection<OptionMenu> options = actions.values();
-
-		for (OptionMenu option : options) {
-			LOG.info(option.getLibelle());
-		}
 	}
 
 }
