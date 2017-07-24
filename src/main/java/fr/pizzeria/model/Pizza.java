@@ -1,14 +1,21 @@
 package fr.pizzeria.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="pizzas")
 public class Pizza {
 
+	public Pizza() {
+		
+	}
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String code;
 	private String nom;
 	double prix;
-	
-	static int currentId;
-	
 	
 	public Pizza(String code, String nom, double prix) {
 		this.id = id;

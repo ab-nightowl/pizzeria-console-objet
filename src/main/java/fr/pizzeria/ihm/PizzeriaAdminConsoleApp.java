@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDaoJpa;
 import fr.pizzeria.dao.PizzaDaoMemoire;
 import fr.pizzeria.ihm.menu.Menu;
 
@@ -16,7 +17,7 @@ public class PizzeriaAdminConsoleApp {
 	public static void main(String[] args) {
 		
 		LOG.debug("Création d'une instance de PizzaDaoMémoire de type IPizzaDao");
-		IPizzaDao pizzaDao = new PizzaDaoMemoire();
+		IPizzaDao pizzaDao = new PizzaDaoJpa();
 		
 		LOG.debug("La methode initPizza est invoquée");
 		pizzaDao.initPizzas();

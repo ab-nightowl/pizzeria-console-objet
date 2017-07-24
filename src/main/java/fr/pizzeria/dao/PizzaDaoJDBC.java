@@ -20,8 +20,6 @@ public class PizzaDaoJDBC implements IPizzaDao {
 
 	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoJDBC.class);
 	
-	
-	
 	private String driverClass;
 	private String url;
 	private String user;
