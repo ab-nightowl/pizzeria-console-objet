@@ -28,12 +28,8 @@ public class PizzaDaoMemoireTest {
 		LOG.info("Création d'une instance de la classe PizzaDaoMemoire");
 		pizzaDaoMemoire = new PizzaDaoMemoire();
 		
-		LOG.info("Initialisation des pizzas...");
-		
 		LOG.debug("La méthode initPizzas est invoquée");
 		pizzaDaoMemoire.initPizzas();
-		
-		LOG.info("...pizzas initialisées");
 		
 		LOG.info("...setUp terminé");
 	}

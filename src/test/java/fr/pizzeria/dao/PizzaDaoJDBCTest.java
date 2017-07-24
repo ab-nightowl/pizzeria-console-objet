@@ -38,7 +38,7 @@ public class PizzaDaoJDBCTest {
 		Class.forName("org.h2.Driver");
 		
 		LOG.info("Création d'une connection vers la BDD.");
-		conn = DriverManager.getConnection("jdbc:h2:mem:testdb", "sa", "");
+		conn = DriverManager.getConnection("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1", "sa", "");
 		
 		LOG.info("...setUpBeforeClass terminé");
 	}
@@ -52,13 +52,13 @@ public class PizzaDaoJDBCTest {
 			PreparedStatement findAllPizzaSt = conn.prepareStatement("SELECT * FROM pizza");
 			findAllPizzaSt.executeQuery();
 			
-		} catch (SQLException e) {
-			LOG.error("La table 'pizza' existe déjà.");
-			
 			LOG.info("Suppression de la table 'pizza'...");
 			PreparedStatement dropTableSt = conn.prepareStatement("DROP TABLE pizza;");
 			dropTableSt.execute();
 			LOG.info("...Table 'pizza' supprimée.");
+			
+		} catch (SQLException e) {
+			LOG.error("La table 'pizza' n'existe pas.");
 			
 		} finally {
 			LOG.info("Création de la table 'pizza'...");
@@ -73,26 +73,11 @@ public class PizzaDaoJDBCTest {
 			createTableSt.execute();
 			LOG.info("...Table 'pizza' créée en base.");
 			
-			LOG.info("Création d'une nouvelle liste de 8 pizzas.");
-			pizzas = new ArrayList<>();
-			pizzas.add(new Pizza("PEP", "Pépéroni", 12.50));
-			pizzas.add(new Pizza("MAR", "Margherita", 14.00));
-			pizzas.add(new Pizza("REI", "La Reine", 11.50));
-			pizzas.add(new Pizza("FRO", "La 4 fromages", 12.00));
-			pizzas.add(new Pizza("CAN", "La Cannibale", 12.50));
-			pizzas.add(new Pizza("SAV", "La Savoyarde", 13.00));
-			pizzas.add(new Pizza("ORI", "L'Orientale", 13.50));
-			pizzas.add(new Pizza("IND", "L'Indienne", 14.00));
+			LOG.info("Création d'une instance de la classe PizzaDaoMemoire");
+			pizzaDaoJDBC = new PizzaDaoJDBC("", "jdbc:h2:mem:testdb", "sa", "");
 			
-			LOG.info("Insertion des 8 pizzas dans la table pizza.");
-			String sqlInsert = "INSERT INTO pizza(code, nom, prix) VALUES (?, ?, ?);";
-			for (Pizza pizza : pizzas) {
-				PreparedStatement insertPizzaSt = conn.prepareStatement(sqlInsert);
-				insertPizzaSt.setString(1, pizza.getCode());
-				insertPizzaSt.setString(2, pizza.getNom());
-				insertPizzaSt.setDouble(3, pizza.getPrix());
-				insertPizzaSt.executeUpdate();
-			}
+			LOG.info("La méthode initPizzas est invoquée.");
+			pizzaDaoJDBC.initPizzas();
 		}
 		
 		LOG.info("...setUp terminé");
@@ -101,9 +86,6 @@ public class PizzaDaoJDBCTest {
 	@Test
 	public void testFindAll() throws DeletePizzaException, SQLException {
 		LOG.info("testFindAllPizza:");
-		
-		LOG.info("Etant donné une instance de la classe PizzaDaoJDBC.");
-		pizzaDaoJDBC = new PizzaDaoJDBC("", "jdbc:h2:mem:testdb", "sa", "");
 		
 		LOG.info("Lorsque la méthode findAllPizzas est invoquée.");
 		pizzas = pizzaDaoJDBC.findAllPizzas();
@@ -115,9 +97,6 @@ public class PizzaDaoJDBCTest {
 
 	@Test
 	public void testFindByCode() throws SQLException {
-		LOG.info("Etant donné une instance de la classe PizzaDaoJDBC.");
-		pizzaDaoJDBC = new PizzaDaoJDBC("", "jdbc:h2:mem:testdb", "sa", "");
-		
 		LOG.info("Lorsque la méthode findAllPizzas est invoquée.");
 		pizzas = pizzaDaoJDBC.findAllPizzas();
 		LOG.info("Alors j'obtiens une liste 8 pizzas.");

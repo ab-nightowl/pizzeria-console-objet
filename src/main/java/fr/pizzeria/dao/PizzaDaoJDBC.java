@@ -20,7 +20,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 
 	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoJDBC.class);
 	
-	private List<Pizza> pizzas;
+	
 	
 	private String driverClass;
 	private String url;
@@ -40,7 +40,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 		LOG.info("Initialisation des pizzas...");
 		
 		LOG.debug("Création d'une liste de 8 pizzas");
-		pizzas = new ArrayList<>();
+		List<Pizza> pizzas = new ArrayList<>();
 		pizzas.add(new Pizza("PEP", "Pépéroni", 12.50));
 		pizzas.add(new Pizza("MAR", "Margherita", 14.00));
 		pizzas.add(new Pizza("REI", "La Reine", 11.50));
@@ -72,6 +72,7 @@ public class PizzaDaoJDBC implements IPizzaDao {
 	
 	@Override
 	public List<Pizza> findAllPizzas() {
+		List<Pizza> pizzas = new ArrayList<>();
 		Connection conn;
 		try {
 			conn = DriverManager.getConnection(url, user, password);
@@ -175,9 +176,10 @@ public class PizzaDaoJDBC implements IPizzaDao {
 			}
 		} catch (SQLException e) {
 			// TODO retourner une exception pizza
-			LOG.error("Une erreur s'est produite.", e);
+			LOG.error("Une erreur s'est produite: le code de la pizza n'existe pas dans la base", e);
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 }
