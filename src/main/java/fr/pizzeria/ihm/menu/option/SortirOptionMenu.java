@@ -10,7 +10,7 @@ public class SortirOptionMenu extends OptionMenu {
 
 	@Override
 	public String getLibelle() {
-		return "99. Sortir";
+		return "Sortir";
 	}
 
 	@Override

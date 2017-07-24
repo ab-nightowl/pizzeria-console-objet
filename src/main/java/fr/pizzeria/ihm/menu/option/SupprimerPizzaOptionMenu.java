@@ -23,7 +23,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public String getLibelle() {
-		return "4. Supprimer une pizza";
+		return "Supprimer une pizza";
 	}
 
 	@Override

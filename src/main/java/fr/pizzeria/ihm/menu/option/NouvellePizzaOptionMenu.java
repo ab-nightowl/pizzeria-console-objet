@@ -24,7 +24,7 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 
 	@Override
 	public String getLibelle() {
-		return "2. Ajouter une nouvelle pizza";
+		return "Ajouter une nouvelle pizza";
 	}
 
 	@Override
@@ -37,8 +37,9 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 			LOG.info("Veuillez saisir le code");
 			code = sc.nextLine().trim();
 
-			if (!code.matches("^[A-Z]{3}$")) {
+			if (!(code.matches("^[A-Z]{3}$"))) {
 				LOG.info("Veuillez saisir un code valide");
+				
 			} else {
 				saisieCorrecte = true;
 			}
