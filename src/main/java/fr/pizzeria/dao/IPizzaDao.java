@@ -7,7 +7,7 @@ import fr.pizzeria.dao.exception.SavePizzaException;
 import fr.pizzeria.dao.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
-public interface IPizzaDao {
+public interface IPizzaDao extends IPizzeriaDB {
 
 	List<Pizza> findAllPizzas();
 	

@@ -1,16 +1,9 @@
 package fr.pizzeria.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
@@ -24,12 +17,6 @@ import fr.pizzeria.model.Pizza;
 public class PizzaDaoJpa implements IPizzaDao {
 
 	private static final Logger LOG = LoggerFactory.getLogger(PizzaDaoJpa.class);
-
-	public EntityManagerFactory emf;
-
-	public PizzaDaoJpa() {
-		emf = Persistence.createEntityManagerFactory("pizzeria-console-new");
-	}
 
 	@Override
 	public void initPizzas() {

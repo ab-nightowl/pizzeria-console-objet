@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm.menu.option;
+package fr.pizzeria.ihm.admin.menu.option;
 
 import java.util.List;
 

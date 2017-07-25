@@ -83,8 +83,8 @@
 		</dependency>
 		<dependency>
 		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-entitymanager</artifactId>
-		    <version>5.1.0.Final</version>
+		    <artifactId>hibernate-core</artifactId>
+		    <version>5.2.10.Final</version>
 		    <scope>runtime</scope>
 		</dependency>
 	</dependencies>

@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm;
+package fr.pizzeria.ihm.admin;
 
 import java.util.Scanner;
 
@@ -7,8 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaDaoJpa;
-import fr.pizzeria.dao.PizzaDaoMemoire;
-import fr.pizzeria.ihm.menu.Menu;
+import fr.pizzeria.ihm.admin.menu.Menu;
 
 public class PizzeriaAdminConsoleApp {
 

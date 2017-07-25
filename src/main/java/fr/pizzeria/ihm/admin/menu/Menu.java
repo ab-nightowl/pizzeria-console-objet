@@ -1,4 +1,4 @@
-package fr.pizzeria.ihm.menu;
+package fr.pizzeria.ihm.admin.menu;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,12 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.ihm.menu.option.ListerPizzasOptionMenu;
-import fr.pizzeria.ihm.menu.option.MettreAJourPizzaOptionMenu;
-import fr.pizzeria.ihm.menu.option.NouvellePizzaOptionMenu;
-import fr.pizzeria.ihm.menu.option.OptionMenu;
-import fr.pizzeria.ihm.menu.option.SortirOptionMenu;
-import fr.pizzeria.ihm.menu.option.SupprimerPizzaOptionMenu;
+import fr.pizzeria.ihm.admin.menu.option.ListerPizzasOptionMenu;
+import fr.pizzeria.ihm.admin.menu.option.MettreAJourPizzaOptionMenu;
+import fr.pizzeria.ihm.admin.menu.option.NouvellePizzaOptionMenu;
+import fr.pizzeria.ihm.admin.menu.option.OptionMenu;
+import fr.pizzeria.ihm.admin.menu.option.SortirOptionMenu;
+import fr.pizzeria.ihm.admin.menu.option.SupprimerPizzaOptionMenu;
 
 public class Menu {
 
