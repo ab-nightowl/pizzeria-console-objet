@@ -12,6 +12,7 @@ import fr.pizzeria.ihm.client.menu.option.OptionMenuClient;
 import fr.pizzeria.ihm.client.menu.option.SeConnecterOptionMenuClient;
 import fr.pizzeria.ihm.client.menu.option.SinscrireOptionMenuClient;
 import fr.pizzeria.ihm.client.menu.option.SortirOptionMenuClient;
+import fr.pizzeria.model.Client;
 
 public class MenuClientNonConnecte extends MenuClient {
 
@@ -19,6 +20,7 @@ public class MenuClientNonConnecte extends MenuClient {
 	private static final int NUMERO_OPTION_SORTIE = 99;
 	
 	private Scanner sc;
+	private Client client;
 	
 	private SinscrireOptionMenuClient sInscrire;
 	private SeConnecterOptionMenuClient seConnecter;
@@ -26,12 +28,13 @@ public class MenuClientNonConnecte extends MenuClient {
 
 	private Map<Integer, OptionMenuClient> actions = new HashMap<>();
 	
-	public MenuClientNonConnecte(IClientDao clientDao, Scanner scanner) {
+	public MenuClientNonConnecte(IClientDao clientDao, Scanner scanner, Client client) {
 		super();
 		this.sc = scanner;
+		this.client = client;
 		
 		this.sInscrire = new SinscrireOptionMenuClient(clientDao, scanner);
-		this.seConnecter = new SeConnecterOptionMenuClient(clientDao, scanner);
+		this.seConnecter = new SeConnecterOptionMenuClient(clientDao, scanner, client);
 		this.sortir = new SortirOptionMenuClient();
 
 		actions.put(1, sInscrire);

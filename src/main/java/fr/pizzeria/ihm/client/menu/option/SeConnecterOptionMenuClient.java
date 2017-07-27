@@ -9,6 +9,7 @@ import fr.pizzeria.dao.CommandeDaoJpa;
 import fr.pizzeria.dao.IClientDao;
 import fr.pizzeria.ihm.client.menu.MenuClient;
 import fr.pizzeria.ihm.client.menu.MenuClientConnecte;
+import fr.pizzeria.model.Client;
 
 public class SeConnecterOptionMenuClient extends OptionMenuClient {
 
@@ -16,11 +17,13 @@ public class SeConnecterOptionMenuClient extends OptionMenuClient {
 	
 	private IClientDao clientDao;
 	private Scanner sc;
+	private Client client;
 
-	public SeConnecterOptionMenuClient(IClientDao clientDao, Scanner scanner) {
+	public SeConnecterOptionMenuClient(IClientDao clientDao, Scanner scanner, Client client) {
 		super();
 		this.clientDao = clientDao;
 		this.sc = scanner;
+		this.client = client;
 	}
 
 	@Override
@@ -59,7 +62,7 @@ public class SeConnecterOptionMenuClient extends OptionMenuClient {
 		try {
 			clientDao.findByEmail(email);
 			CommandeDaoJpa commandeDao = new CommandeDaoJpa();
-			MenuClient menuConnecte = new MenuClientConnecte(commandeDao, sc);
+			MenuClient menuConnecte = new MenuClientConnecte(commandeDao, sc, client);
 			menuConnecte.manage();
 			
 		} catch (Exception e) {

@@ -1,5 +1,7 @@
 package fr.pizzeria.ihm.client.menu.option;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import org.slf4j.Logger;
@@ -8,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import fr.pizzeria.dao.ICommandeDao;
 import fr.pizzeria.dao.PizzaDaoJpa;
 import fr.pizzeria.ihm.admin.menu.option.ListerPizzasOptionMenu;
+import fr.pizzeria.model.Client;
+import fr.pizzeria.model.Commande;
 
 public class CommanderPizzaOptionMenuClient extends OptionMenuClient {
 
@@ -15,11 +19,13 @@ private static final Logger LOG = LoggerFactory.getLogger(CommanderPizzaOptionMe
 	
 	private ICommandeDao commandeDao;
 	private Scanner sc;
+	private Client currentClient;
 
-	public CommanderPizzaOptionMenuClient(ICommandeDao commandeDao, Scanner scanner) {
+	public CommanderPizzaOptionMenuClient(ICommandeDao commandeDao, Scanner scanner, Client currentClient) {
 		super();
 		this.commandeDao = commandeDao;
 		this.sc = scanner;
+		this.currentClient = currentClient;
 	}
 
 	@Override
@@ -47,27 +53,25 @@ private static final Logger LOG = LoggerFactory.getLogger(CommanderPizzaOptionMe
 				saisieCorrecte = true;
 			}
 		} while (!saisieCorrecte);
-
-/**		TO DO: trouver le client connecté 
 		
-		EntityManager em = emf.createEntityManager();
-		String sql = "select c from Client c where c.email='userChoice'";
-		TypedQuery<Client> query = em.createQuery(sql, Client.class);
-		Client client = query.getResultList().get(0);
-		em.close();
+		Commande commande = new Commande();
 		
 		LocalDateTime dateCommande = LocalDateTime.now();
-		String numeroCommande = 
-		new Commande(numeroCommande, dateCommande, client)
+		String dateToS = dateCommande.format(DateTimeFormatter.ofPattern("hhmmss"));
+		String idToS = String.valueOf(commande.getId());
 		
-		TO DO: sauver l'objet commande en base via la méthode saveNewCommande
+		StringBuilder stringBuilder = new StringBuilder();
+		String numeroCommande = stringBuilder.append(dateToS).append("-").append(idToS).toString();
+		
+		commande = new Commande(numeroCommande, dateCommande, currentClient);
+		
+//		TO DO: sauver l'objet commande en base via la méthode saveNewCommande
 		
 		try {
-			commandeDao.saveNewCommande(commande);;
+			commandeDao.saveNewCommande(commande);
 		} catch (Exception e) {
 			LOG.info(e.getMessage());
 		}
-*/
 		
 		return false;
 	

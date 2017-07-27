@@ -27,13 +27,13 @@ public class PizzeriaClientConsoleApp {
 		
 		try (Scanner scanner = new Scanner(System.in)) {
 			LOG.debug("Création d'une instance de MenuClientNonConnecte");
-			MenuClient menuNonConnecte = new MenuClientNonConnecte(clientDao, scanner);
+			MenuClient menuNonConnecte = new MenuClientNonConnecte(clientDao, scanner, null );
 			
 			LOG.debug("La methode manage est invoquée");
 			menuNonConnecte.manage();
 			
 			LOG.debug("Création d'une instance de MenuClientConnecte");
-			MenuClient menuConnecte = new MenuClientConnecte(commandeDao, scanner);
+			MenuClient menuConnecte = new MenuClientConnecte(commandeDao, scanner, null );
 			
 			LOG.debug("La methode manage est invoquée");
 			menuConnecte.manage();

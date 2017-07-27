@@ -9,6 +9,5 @@ public interface ICommandeDao extends IPizzeriaDB {
 	List<Commande> findAllCommandes();
 	
 	void saveNewCommande(Commande commande) throws Exception;
-
 	
 }

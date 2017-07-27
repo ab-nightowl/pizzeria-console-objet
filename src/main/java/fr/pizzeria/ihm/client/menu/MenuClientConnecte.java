@@ -12,6 +12,7 @@ import fr.pizzeria.ihm.client.menu.option.CommanderPizzaOptionMenuClient;
 import fr.pizzeria.ihm.client.menu.option.ListerCommandesOptionMenuClient;
 import fr.pizzeria.ihm.client.menu.option.OptionMenuClient;
 import fr.pizzeria.ihm.client.menu.option.SortirOptionMenuClient;
+import fr.pizzeria.model.Client;
 
 public class MenuClientConnecte extends MenuClient {
 
@@ -20,17 +21,20 @@ public class MenuClientConnecte extends MenuClient {
 	
 	private Scanner sc;
 	
+	private Client currentClient;
+	
 	private CommanderPizzaOptionMenuClient commanderPizza;
 	private ListerCommandesOptionMenuClient listerPizzas;
 	private SortirOptionMenuClient sortir;
 
 	private Map<Integer, OptionMenuClient> actions = new HashMap<>();
 	
-	public MenuClientConnecte(ICommandeDao commandeDao, Scanner scanner) {
+	public MenuClientConnecte(ICommandeDao commandeDao, Scanner scanner, Client currentClient) {
 		super();
 		this.sc = scanner;
+		this.currentClient = currentClient;
 		
-		this.commanderPizza = new CommanderPizzaOptionMenuClient(commandeDao, scanner);
+		this.commanderPizza = new CommanderPizzaOptionMenuClient(commandeDao, scanner, currentClient);
 		this.listerPizzas = new ListerCommandesOptionMenuClient(commandeDao, scanner);
 		this.sortir = new SortirOptionMenuClient();
 

@@ -2,6 +2,8 @@ package fr.pizzeria.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +21,11 @@ public class CommandeDaoJpa implements ICommandeDao {
 
 	@Override
 	public void saveNewCommande(Commande commande) throws Exception {
-		// TODO Auto-generated method stub
-		
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(commande);
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	
