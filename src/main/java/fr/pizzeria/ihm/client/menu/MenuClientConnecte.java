@@ -35,7 +35,7 @@ public class MenuClientConnecte extends MenuClient {
 		this.currentClient = currentClient;
 		
 		this.commanderPizza = new CommanderPizzaOptionMenuClient(commandeDao, scanner, currentClient);
-		this.listerPizzas = new ListerCommandesOptionMenuClient(commandeDao, scanner);
+		this.listerPizzas = new ListerCommandesOptionMenuClient(commandeDao, scanner, currentClient);
 		this.sortir = new SortirOptionMenuClient();
 
 		actions.put(1, commanderPizza);
