@@ -6,7 +6,7 @@ public interface IClientDao extends IPizzeriaDB {
 
 	void saveNewClient(Client client) throws Exception;
 
-	Client findByEmail(String userChoice);
+	Client findByEmail(String userChoice) throws Exception;
 
 	
 }

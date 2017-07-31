@@ -4,19 +4,14 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import fr.pizzeria.model.Client;
 import fr.pizzeria.model.Commande;
 
 public class CommandeDaoJpa implements ICommandeDao {
 
-	private static final Logger LOG = LoggerFactory.getLogger(CommandeDaoJpa.class);
-
 	@Override
-	public List<Commande> findAllCommandes() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Commande> findAllCommandes(Client currentClient) {
+		return currentClient.getCommandes();
 	}
 
 	@Override

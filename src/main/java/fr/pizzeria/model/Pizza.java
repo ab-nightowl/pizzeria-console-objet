@@ -1,8 +1,16 @@
 package fr.pizzeria.model;
 
-import java.util.Set;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name="pizzas")
@@ -12,7 +20,7 @@ public class Pizza {
 	@JoinTable(name = "commandes_pizzas", 
 	joinColumns = @JoinColumn(name="id_pizza", referencedColumnName="id"), 
 	inverseJoinColumns = @JoinColumn(name="id_commande", referencedColumnName="id"))
-	private Set<Commande> commandes;
+	private List<Commande> commandes;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -33,6 +41,15 @@ public class Pizza {
 		this.nom = nom;
 		this.prix = prix;
 		this.urlImage = urlImage;
+	}
+
+	
+	public List<Commande> getCommandes() {
+		return commandes;
+	}
+
+	public void setCommandes(List<Commande> commandes) {
+		this.commandes = commandes;
 	}
 
 	public Integer getId() {

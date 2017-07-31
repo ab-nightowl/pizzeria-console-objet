@@ -10,8 +10,6 @@ import fr.pizzeria.model.Client;
 
 public class ClientDaoJpa implements IClientDao {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ClientDaoJpa.class);
-
 	@Override
 	public void saveNewClient(Client client) throws Exception {
 		EntityManager em = emf.createEntityManager();
@@ -22,7 +20,7 @@ public class ClientDaoJpa implements IClientDao {
 	}
 
 	@Override
-	public Client findByEmail(String userChoice) {
+	public Client findByEmail(String userChoice) throws Exception {
 		EntityManager em = emf.createEntityManager();
 		String sql = "select c from Client c where c.email='userChoice'";
 		TypedQuery<Client> query = em.createQuery(sql, Client.class);

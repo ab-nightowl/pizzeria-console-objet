@@ -84,7 +84,7 @@ public class SinscrireOptionMenuClient extends OptionMenuClient {
 		try {
 			dao.saveNewClient(client);
 		} catch (Exception e) {
-			LOG.info(e.getMessage());
+			LOG.error(e.getMessage(), e);
 		}
 
 		return false;

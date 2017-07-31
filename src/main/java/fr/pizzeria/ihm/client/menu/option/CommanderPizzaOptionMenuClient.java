@@ -15,7 +15,7 @@ import fr.pizzeria.model.Commande;
 
 public class CommanderPizzaOptionMenuClient extends OptionMenuClient {
 
-private static final Logger LOG = LoggerFactory.getLogger(CommanderPizzaOptionMenuClient.class);
+	private static final Logger LOG = LoggerFactory.getLogger(CommanderPizzaOptionMenuClient.class);
 	
 	private ICommandeDao commandeDao;
 	private Scanner sc;
@@ -57,7 +57,7 @@ private static final Logger LOG = LoggerFactory.getLogger(CommanderPizzaOptionMe
 		Commande commande = new Commande();
 		
 		LocalDateTime dateCommande = LocalDateTime.now();
-		String dateToS = dateCommande.format(DateTimeFormatter.ofPattern("hhmmss"));
+		String dateToS = dateCommande.format(DateTimeFormatter.ofPattern("yyyyMMddhhmmss"));
 		String idToS = String.valueOf(commande.getId());
 		
 		StringBuilder stringBuilder = new StringBuilder();
@@ -68,7 +68,7 @@ private static final Logger LOG = LoggerFactory.getLogger(CommanderPizzaOptionMe
 		try {
 			commandeDao.saveNewCommande(commande);
 		} catch (Exception e) {
-			LOG.info(e.getMessage());
+			LOG.error(e.getMessage(), e);
 		}
 		
 		return false;

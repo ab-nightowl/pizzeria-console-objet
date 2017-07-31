@@ -15,7 +15,7 @@ public class PizzeriaAdminConsoleApp {
 
 	public static void main(String[] args) {
 		
-		LOG.debug("Création d'une instance de PizzaDaoMémoire de type IPizzaDao");
+		LOG.debug("Création d'une instance de PizzaDaoJpa de type IPizzaDao");
 		IPizzaDao pizzaDao = new PizzaDaoJpa();
 		
 		LOG.debug("La methode initPizza est invoquée");
