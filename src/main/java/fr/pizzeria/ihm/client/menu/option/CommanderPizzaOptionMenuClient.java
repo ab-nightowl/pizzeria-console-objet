@@ -65,8 +65,6 @@ private static final Logger LOG = LoggerFactory.getLogger(CommanderPizzaOptionMe
 		
 		commande = new Commande(numeroCommande, dateCommande, currentClient);
 		
-//		TO DO: sauver l'objet commande en base via la méthode saveNewCommande
-		
 		try {
 			commandeDao.saveNewCommande(commande);
 		} catch (Exception e) {
