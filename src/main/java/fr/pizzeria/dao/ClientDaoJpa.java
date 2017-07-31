@@ -3,9 +3,6 @@ package fr.pizzeria.dao;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import fr.pizzeria.model.Client;
 
 public class ClientDaoJpa implements IClientDao {

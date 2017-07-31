@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.IClientDao;
+import fr.pizzeria.dao.ICommandeDao;
 import fr.pizzeria.ihm.client.menu.option.OptionMenuClient;
 import fr.pizzeria.ihm.client.menu.option.SeConnecterOptionMenuClient;
 import fr.pizzeria.ihm.client.menu.option.SinscrireOptionMenuClient;
@@ -28,13 +29,13 @@ public class MenuClientNonConnecte extends MenuClient {
 
 	private Map<Integer, OptionMenuClient> actions = new HashMap<>();
 	
-	public MenuClientNonConnecte(IClientDao clientDao, Scanner scanner, Client client) {
+	public MenuClientNonConnecte(IClientDao clientDao, Scanner scanner, ICommandeDao commandeDao, Client client) {
 		super();
 		this.sc = scanner;
 		this.client = client;
 		
 		this.sInscrire = new SinscrireOptionMenuClient(clientDao, scanner);
-		this.seConnecter = new SeConnecterOptionMenuClient(clientDao, scanner, client);
+		this.seConnecter = new SeConnecterOptionMenuClient(clientDao, scanner, commandeDao);
 		this.sortir = new SortirOptionMenuClient();
 
 		actions.put(1, sInscrire);

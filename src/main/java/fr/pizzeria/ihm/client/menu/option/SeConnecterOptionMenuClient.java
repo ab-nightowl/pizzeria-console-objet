@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import fr.pizzeria.dao.CommandeDaoJpa;
 import fr.pizzeria.dao.IClientDao;
+import fr.pizzeria.dao.ICommandeDao;
 import fr.pizzeria.ihm.client.menu.MenuClient;
 import fr.pizzeria.ihm.client.menu.MenuClientConnecte;
 import fr.pizzeria.model.Client;
@@ -17,13 +18,13 @@ public class SeConnecterOptionMenuClient extends OptionMenuClient {
 	
 	private IClientDao clientDao;
 	private Scanner sc;
-	private Client client;
-
-	public SeConnecterOptionMenuClient(IClientDao clientDao, Scanner scanner, Client client) {
+	private ICommandeDao commandeDao;
+	
+	public SeConnecterOptionMenuClient(IClientDao clientDao, Scanner scanner, ICommandeDao commandeDao) {
 		super();
 		this.clientDao = clientDao;
 		this.sc = scanner;
-		this.client = client;
+		this.commandeDao = commandeDao;
 	}
 
 	@Override
@@ -60,8 +61,7 @@ public class SeConnecterOptionMenuClient extends OptionMenuClient {
 		} while (!saisieCorrecte);
 
 		try {
-			clientDao.findByEmail(email);
-			CommandeDaoJpa commandeDao = new CommandeDaoJpa();
+			Client client = clientDao.findByEmail(email);
 			MenuClient menuConnecte = new MenuClientConnecte(commandeDao, sc, client);
 			menuConnecte.manage();
 			
