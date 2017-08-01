@@ -5,7 +5,6 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.pizzeria.dao.CommandeDaoJpa;
 import fr.pizzeria.dao.IClientDao;
 import fr.pizzeria.dao.ICommandeDao;
 import fr.pizzeria.ihm.client.menu.MenuClient;
@@ -62,8 +61,11 @@ public class SeConnecterOptionMenuClient extends OptionMenuClient {
 
 		try {
 			Client client = clientDao.findByEmail(email);
-			MenuClient menuConnecte = new MenuClientConnecte(commandeDao, sc, client);
-			menuConnecte.manage();
+			if (motDePasse.equals(client.getMotDePasse())) {
+				MenuClient menuConnecte = new MenuClientConnecte(commandeDao, sc, client);
+				menuConnecte.manage();
+			}
+			
 			
 		} catch (Exception e) {
 			LOG.info(e.getMessage());
