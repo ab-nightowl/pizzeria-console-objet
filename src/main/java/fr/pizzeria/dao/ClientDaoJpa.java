@@ -19,8 +19,9 @@ public class ClientDaoJpa implements IClientDao {
 	@Override
 	public Client findByEmail(String userChoice) throws Exception {
 		EntityManager em = emf.createEntityManager();
-		String sql = "select c from Client c where c.email='userChoice'";
-		TypedQuery<Client> query = em.createQuery(sql, Client.class);
+		String sql = "select c from Client c where c.email=:userChoice";
+		TypedQuery<Client> query = em.createQuery(sql, Client.class)
+				.setParameter("userChoice", userChoice);
 		Client client = query.getResultList().get(0);
 		em.close();
 
