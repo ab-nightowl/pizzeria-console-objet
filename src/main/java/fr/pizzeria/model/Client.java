@@ -3,6 +3,7 @@ package fr.pizzeria.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 @Table(name="clients")
 public class Client {
 	
+	//@OneToMany(mappedBy="client", fetch = FetchType.EAGER)
 	@OneToMany(mappedBy="client")
 	private List<Commande> commandes;
 	
@@ -24,9 +26,7 @@ public class Client {
 	private String email;
 	private String motDePasse;
 	
-	public Client() {
-		super();
-	}
+	public Client() {}
 
 	public Client(String nom, String prenom, String email, String motDePasse) {
 		this.nom = nom;

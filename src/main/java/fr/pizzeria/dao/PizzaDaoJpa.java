@@ -66,8 +66,9 @@ public class PizzaDaoJpa implements IPizzaDao {
 	@Override
 	public boolean findByCode(String userChoice) {
 		EntityManager em = emf.createEntityManager();
-		String sql = "select p from Pizza p where p.code='userChoice'";
-		TypedQuery<Pizza> query = em.createQuery(sql, Pizza.class);
+		String sql = "select p from Pizza p where p.code=:userChoice";
+		TypedQuery<Pizza> query = em.createQuery(sql, Pizza.class)
+				.setParameter("userChoice", userChoice);
 		query.getResultList().get(0);
 		em.close();
 
@@ -86,8 +87,9 @@ public class PizzaDaoJpa implements IPizzaDao {
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
 		EntityManager em = emf.createEntityManager();
-		String sql = "select p from Pizza p where p.code='codePizza'";
-		TypedQuery<Pizza> query = em.createQuery(sql, Pizza.class);
+		String sql = "select p from Pizza p where p.code=:codePizza";
+		TypedQuery<Pizza> query = em.createQuery(sql, Pizza.class)
+				.setParameter("codePizza", codePizza);
 		
 		Pizza result = query.getSingleResult();
 		
